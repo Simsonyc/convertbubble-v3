@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>ConvertBubble V3 — Runtime Playground</title>
+</head>
+
+<body>
+  <script src="../runtime/runtime.js"></script>
+  <script src="../modules/logger.js"></script>
+
+  <script>
+    ConvertBubbleRuntime.render({
+      launcher: {
+        type: "video",
+        src: "/assets/launcher/preview-loop.mp4",
+        size: 64,
+        shape: "circle"
+      },
+      position: {
+        corner: "BR",
+        margin: 16
+      },
+      player: {
+        src: "/assets/shared/demo.mp4",
+        autoplay: true,
+        controls: true
+      }
+    });
+  </script>
+</body>
+</html>
