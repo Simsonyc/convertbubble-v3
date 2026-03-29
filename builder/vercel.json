@@ -1,5 +1,6 @@
 {
+  "root": "builder",
   "rewrites": [
-    { "source": "/(.*)", "destination": "/builder/$1" }
+    { "source": "/(.*)", "destination": "/$1" }
   ]
 }
