@@ -1,0 +1,211 @@
+/* =========================================================
+   CONVERTBUBBLE — SKIN BASELINE (NEUTRAL)
+   ---------------------------------------------------------
+   - Ce skin est la référence UX absolue.
+   - Il n’introduit AUCUNE émotion.
+   - Il ne modifie PAS la structure (--cb-*).
+   - Il ne crée PAS de hiérarchie.
+   - Il sert uniquement à rendre l’outil lisible.
+   
+   Toute esthétique future (Prestige, etc.)
+   doit respecter la hiérarchie perçue ici.
+   ========================================================= */
+/* ===============================
+   CONVERTBUBBLE — BASELINE SKIN
+   =============================== */
+/* BASELINE START */
+
+/* Global neutral canvas (no emotion, no depth) */
+html, body{
+  background: #f2f2f2;
+  color: #1c1c1c;
+}
+
+/* Shell stays silent and flat */
+#cb-shell{
+  background: transparent;
+  color: inherit;
+}
+
+/* Cockpit: visually neutralized (no “bar”, no card, no contrast pull) */
+#cb-header,
+#cb-tabs,
+#cb-tabs-capsule{
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  color: #4a4a4a;
+}
+
+/* Make the cockpit cognitively quieter than the surface */
+#cb-brand,
+#cb-actions{
+  opacity: 0.78;
+}
+
+/* Surface: plain work plane, minimal separation only */
+#cb-main,
+#cb-main-inner{
+  background: #ffffff;
+  box-shadow: none !important;
+  border: none !important;
+  color: #1c1c1c;
+}
+
+/* Minimal functional delimiter (not decorative) */
+#cb-main{
+  border-top: 1px solid #e2e2e2;
+}
+
+/* Ensure panels don’t inherit any “card” feel from elsewhere */
+#cb-main-inner,
+#cb-main-inner .cb-panel{
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* BASELINE END */
+
+
+
+
+/* =========================================================
+   SKIN BASELINE — NEUTRAL / INSTRUMENT
+   ========================================================= */
+
+:root {
+
+  /* ---------- COULEURS NEUTRES ---------- */
+
+  --cb-color-bg: #f5f6f8;        /* fond global */
+  --cb-color-surface: #ffffff;  /* surface de travail */
+  --cb-color-frame: #f0f1f3;    /* cockpit */
+
+  --cb-color-text: #1a1a1a;     /* texte principal */
+  --cb-color-muted: #6b6f76;    /* texte secondaire */
+
+  --cb-color-border: #dcdfe3;   /* séparations fonctionnelles */
+
+  /* ---------- FEEDBACK NEUTRE ---------- */
+
+  --cb-focus-ring: rgba(0,0,0,0.15);
+
+}
+
+
+/* =========================================================
+   PHASE 1 — COCKPIT GEOMETRIQUE (PREVIEW ONLY)
+   Objectif : header + tabs = UNE seule ligne perçue
+   ========================================================= */
+
+body.cb-preview-autohide {
+
+  /* ---------- HEADER : RAIL MAÎTRE ---------- */
+  #cb-header{
+    position: relative;
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    height: 64px;
+    padding: 0 20px;
+
+    /* neutralisation SaaS */
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  /* ---------- BRAND (GAUCHE) ---------- */
+  #cb-brand{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+  }
+
+  /* ---------- ACTIONS (DROITE) ---------- */
+  #cb-actions{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* ---------- TABS : ASPIRATION VISUELLE ---------- */
+  #cb-tabs{
+    position: absolute;
+    left: 50%;
+    top: 0;
+
+    height: 64px;
+    transform: translateX(-50%);
+
+    display: flex;
+    align-items: center;
+
+    margin: 20;
+    padding: 0;
+
+    /* neutralisation complète */
+    background: none;
+    box-shadow: none;
+    border: none;
+  }
+
+  #cb-tabs-capsule{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    background: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  /* ---------- SUPPRESSION DE TOUTE BARRE / SEPARATEUR ---------- */
+  #cb-tabs::before,
+  #cb-tabs::after{
+    display: none !important;
+  }
+
+  /* ---------- MAIN : AUCUNE RUPTURE VISUELLE ---------- */
+  #cb-main{
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+}
+/* ===================================================
+   PREVIEW — VISUAL NEUTRALISATION
+   Scope : body.cb-preview-autohide
+   ---------------------------------------------------
+   Goal:
+   - No SaaS card feeling
+   - cbp-surface perceived as single surface
+   - Runtime public untouched
+   =================================================== */
+
+/* Neutralise Bubble card look in preview */
+body.cb-preview-autohide .cb-bui-card{
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+/* Remove decorative layer if present */
+body.cb-preview-autohide .cb-bui-card::before{
+  content: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Neutralise Shell visual wrappers (preview only) */
+body.cb-preview-autohide #cb-main,
+body.cb-preview-autohide #cb-main-inner{
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+}

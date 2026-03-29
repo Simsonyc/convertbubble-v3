@@ -1,0 +1,159 @@
+/* BUBBLE.CSS — layout métier Bubble uniquement
+   Objectif: 3 cards visibles + Advanced hors flux principal
+   Interdit: rythme, padding, gap, couleurs, effets
+*/
+
+/* ===================================================
+   0) SURFACE (conteneur Bubble)
+   =================================================== */
+
+.cb-bubble-ui .cbp-surface{
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===================================================
+   1) SUPPRESSION DU HEADER PARASITE (mobile + desktop)
+   - "ConvertBubble — Bulle V3"
+   - bouton collapse
+   =================================================== */
+
+.cb-bubble-ui .cb-bui-header{
+  display: none;
+}
+
+/* ===================================================
+   2) BODY: cards empilées, ordre strict
+   =================================================== */
+
+.cb-bubble-ui .cb-bui-body{
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===================================================
+   3) CARD 1 — APPARENCE (STYLE)
+   Conserver: forme, taille, bordure, fond texte
+   Déplacer hors flux: position
+   =================================================== */
+
+/* Retire "Position" du flux principal (Position + Astuce sont dans la même row) */
+.cb-bui-row:has(#corner){
+  display: none;
+}
+
+/* ===================================================
+   4) CARD 2 — CONTENU
+   Conserver: dropzone + ratio
+   Retirer doublon cognitif: select Type
+   =================================================== */
+
+/* Cache uniquement le bloc "Type" (garde Ratio) */
+.cb-bui-row > div:has(#mediaType){
+  display: none;
+}
+
+/* La row devient mono-colonne si "Type" est caché */
+.cb-bui-row:has(#mediaType){
+  grid-template-columns: 1fr;
+}
+
+/* ===================================================
+   5) CARD 3 — MESSAGE
+   Conserver: texte, taille, couleur
+   Retirer du flux: police (advanced)
+   =================================================== */
+
+/* Cache uniquement le bloc Police (garde Couleur texte) */
+.cb-bui-row > div:has(#fontFamily){
+  display: none;
+}
+
+/* La row devient mono-colonne si Police est cachée */
+.cb-bui-row:has(#fontFamily){
+  grid-template-columns: 1fr;
+}
+
+/* ===================================================
+   6) ADVANCED — hors flux principal
+   Retirer Animation de l’écran principal (vue dédiée)
+   =================================================== */
+
+/* Cache la card Animation (4e section) */
+.cb-bui-body > .cb-bui-card:nth-of-type(4){
+  display: none;
+}
+
+/* ===================================================
+   7) ROWS — organisation métier uniquement
+   (breakpoints déplacés dans base.css, donc ici 1 colonne)
+   =================================================== */
+
+.cb-bui-row{
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+/* ===================================================
+   8) DROPZONE — layout métier uniquement
+   =================================================== */
+
+.cb-bui-drop{
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+}
+
+/* ===================================================
+   9) DESKTOP — 2 colonnes (cards à gauche)
+   Preview à droite: nécessite un sélecteur réel
+   =================================================== */
+
+/* Colonne gauche: surface cards */
+@media (min-width: 960px){
+  .cb-bubble-ui .cbp-surface{
+    align-items: start;
+  }
+}
+/* =========================================
+   KILL UI CONTAINER BORDER (FINAL)
+   ========================================= */
+
+.cb-bubble-ui{
+  border: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+/* KILL ROOT BUBBLE BORDER — FINAL */
+.cb-bubble-ui {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+/* === KILL BUBBLE CONTAINER BORDER (structure only) === */
+.cb-bubble-ui{
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+/* =========================================
+   NEUTRALISATION DE LA CARD UI PARASITE
+   (ConvertBubble — Bulle V3 wrapper)
+   ========================================= */
+
+.cb-bubble-ui > .cb-bui-card {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.cb-bubble-ui,
+.cb-bubble-ui * {
+  --_cb-ui-bg: transparent;
+}
+
+.cb-bubble-ui {
+  background: transparent !important;
+}

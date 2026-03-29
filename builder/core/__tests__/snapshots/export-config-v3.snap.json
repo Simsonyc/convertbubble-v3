@@ -1,0 +1,41 @@
+{
+  "defaultExport": {
+    "launcher": {
+      "type": "video",
+      "src": "https://cdn.convertbubble.io/assets/launcher/preview-loop.mp4",
+      "size": 64,
+      "shape": "circle"
+    },
+    "position": {
+      "corner": "BR",
+      "margin": 16
+    },
+    "player": {
+      "src": "https://cdn.convertbubble.io/assets/shared/demo.mp4",
+      "autoplay": true,
+      "controls": true
+    }
+  },
+  "withTimeline": {
+    "launcher": {
+      "type": "video",
+      "src": "https://cdn.convertbubble.io/assets/launcher/preview-loop.mp4",
+      "size": 64,
+      "shape": "circle"
+    },
+    "position": {
+      "corner": "BR",
+      "margin": 16
+    },
+    "player": {
+      "src": "https://cdn.convertbubble.io/assets/shared/demo.mp4",
+      "autoplay": true,
+      "controls": true
+    },
+    "timeline": [
+      { "at": 3, "name": "intro" },
+      { "at": 12, "name": "pricing_visible" }
+    ]
+  }
+}
+

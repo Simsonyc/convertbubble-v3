@@ -1,0 +1,524 @@
+/* ==========================================================
+   ConvertBubble Builder V3 — theme.css
+   Design system Prestige Dark
+   Charge après #cb-skin (bootstrap) → écrase les tokens light.
+   ========================================================== */
+
+/* ----------------------------------------------------------
+   1. TOKENS DARK
+   ---------------------------------------------------------- */
+:root {
+  --cb-bg:      #111210;
+  --cb-rail:    #1a1917;
+  --cb-panel:   #201e1b;
+  --cb-panel2:  #272420;
+  --cb-inset:   #0c0b09;
+
+  --cb-border:  rgba(255,235,190,0.06);
+  --cb-border2: rgba(255,235,190,0.10);
+  --cb-border3: rgba(255,235,190,0.18);
+
+  --cb-accent:  #4f8cff;
+  --cb-accent2: #7cacff;
+  --cb-green:   #22d3a0;
+  --cb-amber:   #c8973a;
+  --cb-amber2:  #e8b45a;
+
+  --cb-text:    #ede8df;
+  --cb-muted:   #6e6a62;
+  --cb-muted2:  #3e3b35;
+
+  /* Aliases bootstrap — écrasent les vars light de #cb-skin */
+  --cb-bg-2:         #0c0b09;
+  --cb-glass:        rgba(26,25,23,0.88);
+  --cb-glass-2:      rgba(26,25,23,0.65);
+  --cb-card:         #201e1b;
+  --cb-card-border:  rgba(255,235,190,0.10);
+  --cb-shadow:       0 8px 32px rgba(0,0,0,0.55);
+  --cb-shadow-strong:0 16px 56px rgba(0,0,0,0.70);
+
+  --cb-radius-1: 10px;
+  --cb-radius-2: 14px;
+  --cb-radius-3: 18px;
+
+  --cb-header-h:    54px;
+  --cb-tabs-h:      54px;
+  --cb-safe-bottom: 260px;
+}
+
+/* ----------------------------------------------------------
+   2. RESET / BASE — écrase le background radial clair du bootstrap
+   ---------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background:
+    radial-gradient(900px 600px at 20% 10%, rgba(79,140,255,0.05), transparent 55%),
+    radial-gradient(700px 500px at 85% 75%, rgba(200,151,58,0.04), transparent 50%),
+    linear-gradient(180deg, #111210, #0c0b09) !important;
+  color: var(--cb-text) !important;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+button { font-family: inherit; }
+
+/* ----------------------------------------------------------
+   3. SHELL
+   ---------------------------------------------------------- */
+#cb-shell {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ----------------------------------------------------------
+   4. HEADER — brand gauche / actions droite, 1 seule ligne
+   ---------------------------------------------------------- */
+#cb-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  height: auto !important;
+  min-height: 52px;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-wrap: nowrap !important;
+  gap: 10px;
+  padding: 10px 16px;
+  margin: 10px 10px 0;
+  border-radius: 18px;
+  background: rgba(26,25,23,0.97) !important;
+  border: 1px solid rgba(255,235,190,0.10) !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.55) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+}
+
+#cb-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  font-size: 13px;
+  color: var(--cb-text);
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+/* Dot amber */
+#cb-brand .dot {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #e8b45a, #c8973a) !important;
+  box-shadow: 0 0 12px rgba(200,151,58,0.45) !important;
+}
+
+/* Actions chips — FR / EN / Light|Dark — ne débordent pas */
+#cb-actions {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* ----------------------------------------------------------
+   5. CHIPS header (lang / theme)
+   Compact : padding réduit, taille texte petite, nowrap
+   ---------------------------------------------------------- */
+.cb-chip {
+  border: 1px solid rgba(255,235,190,0.12) !important;
+  background: rgba(32,30,27,0.85) !important;
+  color: var(--cb-muted) !important;
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+  transition: color .15s, border-color .15s, background .15s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.cb-chip:hover {
+  color: var(--cb-text) !important;
+  border-color: rgba(255,235,190,0.22) !important;
+}
+
+.cb-chip.is-active {
+  background: rgba(200,151,58,0.14) !important;
+  border-color: rgba(200,151,58,0.32) !important;
+  color: var(--cb-amber2) !important;
+}
+
+/* ----------------------------------------------------------
+   6. TABS CAPSULE — dark, séparée visuellement du header
+   ---------------------------------------------------------- */
+#cb-tabs {
+  /* PAS sticky : on évite tout conflit de superposition avec le header */
+  position: relative !important;
+  z-index: 35;
+  height: auto !important;
+  min-height: var(--cb-tabs-h);
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  /* margin-top généreux pour séparer clairement du header */
+  margin: 10px 10px 0;
+}
+
+#cb-tabs-capsule {
+  width: min(520px, 100%);
+  background: rgba(26,25,23,0.96) !important;
+  border: 1px solid rgba(255,235,190,0.10) !important;
+  border-radius: 999px;
+  padding: 5px;
+  display: flex;
+  gap: 4px;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.45) !important;
+}
+
+.cb-tab {
+  flex: 1;
+  border: 0;
+  background: transparent !important;
+  color: var(--cb-muted) !important;
+  border-radius: 999px;
+  padding: 9px 12px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .01em;
+  cursor: pointer;
+  transition: color .15s, background .15s, box-shadow .15s;
+  position: relative;
+  white-space: nowrap;
+}
+
+/* Actif — amber (écrase le gradient bleu bootstrap) */
+.cb-tab.is-active {
+  background: rgba(39,36,32,0.95) !important;
+  color: var(--cb-amber2) !important;
+  box-shadow:
+    0 0 0 1px rgba(255,235,190,0.18) inset,
+    0 4px 14px rgba(0,0,0,0.40) !important;
+}
+
+/* Point lumineux tab active */
+.cb-tab.is-active::after {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--cb-amber2);
+  box-shadow: 0 0 6px var(--cb-amber2);
+  margin-left: 6px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+
+/* ----------------------------------------------------------
+   7. MAIN SCROLL
+   ---------------------------------------------------------- */
+#cb-main {
+  flex: 1;
+  overflow: auto;
+  padding: 12px;
+  padding-bottom: var(--cb-safe-bottom);
+  display: flex;
+  justify-content: center;
+  scrollbar-width: thin;
+  scrollbar-color: var(--cb-muted2) transparent;
+}
+
+#cb-main::-webkit-scrollbar { width: 4px; }
+#cb-main::-webkit-scrollbar-track { background: transparent; }
+#cb-main::-webkit-scrollbar-thumb { background: var(--cb-muted2); border-radius: 999px; }
+
+#cb-main-inner {
+  width: min(760px, 100%);
+  display: grid;
+  gap: 10px;
+}
+
+/* ----------------------------------------------------------
+   8. PANELS — dark
+   ---------------------------------------------------------- */
+.cb-panel {
+  border-radius: var(--cb-radius-3);
+  background: var(--cb-panel) !important;
+  border: 1px solid var(--cb-border2) !important;
+  box-shadow: var(--cb-shadow) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding: 14px;
+}
+
+.cb-panel[data-variant="solid"] {
+  background: var(--cb-panel) !important;
+  border: 1px solid var(--cb-border2) !important;
+  box-shadow: var(--cb-shadow) !important;
+  backdrop-filter: none !important;
+}
+
+.cb-panel[data-variant="glass"] {
+  background: rgba(26,25,23,0.72) !important;
+  border: 1px solid var(--cb-border2) !important;
+  box-shadow: var(--cb-shadow) !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+}
+
+.cb-panel[data-variant="flat"] {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  overflow: visible !important;
+}
+
+/* ----------------------------------------------------------
+   9. UTILITY
+   ---------------------------------------------------------- */
+.cb-hidden { display: none !important; }
+.cb-bubble-ui-root { width: 100%; }
+#cb-bubble-panel-content { overflow: visible; max-height: none; }
+
+/* ----------------------------------------------------------
+   10. SCOPE BAR
+   ---------------------------------------------------------- */
+.cb-scope-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 7px 12px;
+  background: var(--cb-inset);
+  border: 1px solid var(--cb-border);
+  border-radius: var(--cb-radius-1);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.cb-scope-bar::-webkit-scrollbar { display: none; }
+.cb-scope-bar__item { display: flex; align-items: center; gap: 5px; flex-shrink: 0; white-space: nowrap; }
+.cb-scope-bar__key { color: var(--cb-muted); font-size: 10px; text-transform: uppercase; letter-spacing: .08em; }
+.cb-scope-bar__val { color: var(--cb-green); font-size: 12px; text-shadow: 0 0 8px rgba(34,211,160,0.4); }
+
+/* ----------------------------------------------------------
+   11. PRESTIGE SURFACE
+   ---------------------------------------------------------- */
+.cbp-surface {
+  background: var(--cb-panel);
+  border: 1px solid var(--cb-border2);
+  border-radius: var(--cb-radius-2);
+  overflow: hidden;
+}
+
+.cb-ui__header {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; padding: 12px 14px;
+  border-bottom: 0.5px solid var(--cb-border);
+  background: var(--cb-rail);
+}
+
+.cb-ui__title { margin: 0; font-size: 13px; font-weight: 800; color: var(--cb-text); }
+
+.cb-ui__body { padding: 14px; display: grid; gap: 12px; }
+
+.cb-section { border-bottom: 0.5px solid var(--cb-border); padding-bottom: 14px; }
+.cb-section:last-child { border-bottom: none; padding-bottom: 0; }
+.cb-section__title { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--cb-muted); margin: 0 0 10px; }
+
+/* ----------------------------------------------------------
+   12. FORM ELEMENTS
+   ---------------------------------------------------------- */
+.cb-label { font-size: 11px; font-weight: 700; color: var(--cb-muted); margin-bottom: 6px; }
+
+.cb-input, .cb-select {
+  width: 100%; height: 38px;
+  border-radius: var(--cb-radius-1);
+  border: 1px solid var(--cb-border2);
+  background: var(--cb-inset); color: var(--cb-text);
+  padding: 0 10px; font-size: 13px; font-family: inherit;
+  outline: none; appearance: none; -webkit-appearance: none;
+  transition: border-color .15s, box-shadow .15s;
+}
+.cb-input:focus, .cb-select:focus {
+  border-color: var(--cb-accent);
+  box-shadow: 0 0 0 3px rgba(79,140,255,0.18);
+}
+.cb-input::placeholder { color: var(--cb-muted2); }
+
+.cb-range {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 4px; border-radius: 999px;
+  background: var(--cb-muted2); outline: none; cursor: pointer;
+}
+.cb-range::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 16px; height: 16px;
+  border-radius: 999px; background: #fff;
+  box-shadow: 0 0 0 2px var(--cb-accent), 0 0 10px rgba(79,140,255,0.45);
+  cursor: pointer;
+}
+.cb-range::-moz-range-thumb {
+  width: 16px; height: 16px; border-radius: 999px; border: none;
+  background: #fff;
+  box-shadow: 0 0 0 2px var(--cb-accent), 0 0 10px rgba(79,140,255,0.45);
+}
+
+.cb-color {
+  width: 48px; height: 38px; border-radius: var(--cb-radius-1);
+  border: 1px solid var(--cb-border2); background: var(--cb-inset);
+  padding: 4px; cursor: pointer; flex-shrink: 0;
+}
+.cb-color::-webkit-color-swatch-wrapper { padding: 0; border-radius: 8px; }
+.cb-color::-webkit-color-swatch { border: none; border-radius: 8px; }
+.cb-color--wide { width: 100%; }
+
+.cb-live-val {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 11px; font-weight: 600;
+  color: var(--cb-green); text-shadow: 0 0 6px rgba(34,211,160,0.35);
+  letter-spacing: .04em;
+}
+
+/* ----------------------------------------------------------
+   13. CHIPS MODULES
+   ---------------------------------------------------------- */
+.cb-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.cb-chips__item {
+  padding: 6px 12px; border-radius: 999px;
+  border: 1px solid var(--cb-border2); background: var(--cb-inset);
+  color: var(--cb-muted); font-size: 12px; font-weight: 700;
+  cursor: pointer; transition: all .15s; user-select: none;
+}
+.cb-chips__item:hover { border-color: var(--cb-border3); color: var(--cb-text); }
+.cb-chips__item.is-active { background: rgba(79,140,255,0.12); border-color: rgba(79,140,255,0.35); color: var(--cb-accent2); }
+.cb-chips__item--amber.is-active { background: rgba(200,151,58,0.12); border-color: rgba(200,151,58,0.35); color: var(--cb-amber2); }
+
+/* ----------------------------------------------------------
+   14. POSITION GRID 2×2
+   ---------------------------------------------------------- */
+.cb-pos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; width: fit-content; }
+.cb-pos-grid__btn {
+  width: 56px; height: 40px; border-radius: var(--cb-radius-1);
+  border: 1px solid var(--cb-border2); background: var(--cb-inset);
+  color: var(--cb-muted); font-size: 11px; font-weight: 800;
+  cursor: pointer; transition: all .15s;
+}
+.cb-pos-grid__btn:hover { border-color: var(--cb-border3); color: var(--cb-text); }
+.cb-pos-grid__btn.is-active { background: rgba(200,151,58,0.12); border-color: var(--cb-amber); color: var(--cb-amber2); box-shadow: 0 0 10px rgba(200,151,58,0.2); }
+
+/* ----------------------------------------------------------
+   15. BUTTONS
+   ---------------------------------------------------------- */
+.cb-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 6px; padding: 9px 18px; border-radius: var(--cb-radius-1);
+  border: 1px solid rgba(200,151,58,0.35);
+  background: linear-gradient(160deg, rgba(200,151,58,0.18), rgba(200,151,58,0.08));
+  color: var(--cb-amber2); font-size: 13px; font-weight: 700; font-family: inherit;
+  cursor: pointer; transition: all .15s;
+  box-shadow: 0 0 14px rgba(200,151,58,0.12);
+}
+.cb-btn:hover { border-color: rgba(200,151,58,0.55); box-shadow: 0 0 20px rgba(200,151,58,0.25); color: #fff; }
+.cb-btn:active { transform: scale(0.97); }
+.cb-btn--ghost { background: transparent; border-color: var(--cb-border2); color: var(--cb-muted); box-shadow: none; }
+.cb-btn--ghost:hover { border-color: var(--cb-border3); color: var(--cb-text); box-shadow: none; }
+.cb-btn--danger { border-color: rgba(255,80,80,0.35); background: rgba(255,80,80,0.08); color: #ff6060; box-shadow: none; }
+.cb-btn--danger:hover { border-color: rgba(255,80,80,0.6); box-shadow: 0 0 14px rgba(255,80,80,0.2); }
+.cb-btn--sm { padding: 5px 12px; font-size: 11px; }
+.cb-btn--full { width: 100%; }
+
+/* ----------------------------------------------------------
+   16. LAYOUT HELPERS
+   ---------------------------------------------------------- */
+.cb-row { display: flex; align-items: center; gap: 10px; }
+.cb-row--between { justify-content: space-between; }
+.cb-grow { flex: 1; }
+.cb-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media (max-width: 420px) { .cb-grid-2 { grid-template-columns: 1fr; } }
+
+/* ----------------------------------------------------------
+   17. CARD inner
+   ---------------------------------------------------------- */
+.cb-card {
+  background: var(--cb-panel2); border: 1px solid var(--cb-border);
+  border-radius: var(--cb-radius-1); padding: 12px; display: grid; gap: 10px;
+}
+
+/* ----------------------------------------------------------
+   18. CODE BLOCK
+   ---------------------------------------------------------- */
+.cb-code-block {
+  background: var(--cb-inset); border: 1px solid var(--cb-border2);
+  border-radius: var(--cb-radius-1); padding: 12px 14px;
+  font-family: ui-monospace, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px; line-height: 1.6;
+  color: var(--cb-green); word-break: break-all; white-space: pre-wrap;
+  text-shadow: 0 0 6px rgba(34,211,160,0.2);
+  max-height: 180px; overflow-y: auto;
+  scrollbar-width: thin; scrollbar-color: var(--cb-muted2) transparent;
+}
+.cb-code-block::-webkit-scrollbar { width: 3px; }
+.cb-code-block::-webkit-scrollbar-thumb { background: var(--cb-muted2); border-radius: 999px; }
+
+/* ----------------------------------------------------------
+   19. HINT
+   ---------------------------------------------------------- */
+.cb-hint { font-size: 12px; color: var(--cb-muted); font-weight: 600; font-style: italic; padding: 4px 0; }
+
+/* ----------------------------------------------------------
+   20. DROPZONE
+   ---------------------------------------------------------- */
+.cb-dropzone {
+  border: 1px dashed var(--cb-border2); border-radius: var(--cb-radius-1);
+  background: var(--cb-inset); padding: 14px; display: grid; gap: 8px;
+  transition: border-color .15s, background .15s; cursor: pointer;
+}
+.cb-dropzone.is-over { border-color: var(--cb-accent); background: rgba(79,140,255,0.06); }
+.cb-dropzone__label { font-size: 12px; color: var(--cb-muted); font-weight: 600; }
+
+/* ----------------------------------------------------------
+   21. STATUS
+   ---------------------------------------------------------- */
+.cb-status { display: inline-flex; align-items: center; gap: 6px; font-family: ui-monospace, Consolas, monospace; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.cb-status__dot { width: 6px; height: 6px; border-radius: 999px; background: var(--cb-green); box-shadow: 0 0 6px var(--cb-green); flex-shrink: 0; }
+.cb-status--amber .cb-status__dot { background: var(--cb-amber2); box-shadow: 0 0 6px var(--cb-amber2); }
+.cb-status--text { color: var(--cb-green); text-shadow: 0 0 6px rgba(34,211,160,0.3); }
+
+/* ----------------------------------------------------------
+   22. COPY FLASH
+   ---------------------------------------------------------- */
+.cb-copy-flash { color: var(--cb-green); font-size: 12px; font-weight: 700; opacity: 0; transition: opacity .2s; }
+.cb-copy-flash.is-visible { opacity: 1; }
+
+/* ----------------------------------------------------------
+   23. MOBILE ≤480px
+   ---------------------------------------------------------- */
+@media (max-width: 480px) {
+  :root { --cb-safe-bottom: 320px; }
+  #cb-header { margin-left: 8px; margin-right: 8px; }
+  #cb-tabs   { margin-left: 8px; margin-right: 8px; }
+  #cb-main   { padding-left: 10px; padding-right: 10px; }
+  /* Masquer le texte brand sur très petit écran, garder le dot */
+  #cb-brand > span:last-child { display: none; }
+  .cb-chip { padding: 4px 8px; font-size: 10px; }
+}

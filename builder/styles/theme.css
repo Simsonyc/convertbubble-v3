@@ -1,0 +1,513 @@
+/* ==========================================================
+   ConvertBubble Builder V3 — theme.css  (Prestige Dark)
+   ========================================================== */
+
+/* ----------------------------------------------------------
+   1. TOKENS — :root + html[data-cb-theme="dark"] pour battre #cb-skin
+   ---------------------------------------------------------- */
+:root,
+html[data-cb-theme="dark"] {
+  --cb-bg:      #111210;
+  --cb-bg-2:    #0c0b09;
+  --cb-rail:    #1a1917;
+  --cb-panel:   #201e1b;
+  --cb-panel2:  #272420;
+  --cb-inset:   #0c0b09;
+
+  --cb-border:  rgba(255,235,190,0.06);
+  --cb-border2: rgba(255,235,190,0.10);
+  --cb-border3: rgba(255,235,190,0.18);
+
+  --cb-accent:  #4f8cff;
+  --cb-accent2: #7cacff;
+  --cb-green:   #22d3a0;
+  --cb-amber:   #c8973a;
+  --cb-amber2:  #e8b45a;
+
+  --cb-text:    #ede8df;
+  --cb-muted:   #6e6a62;
+  --cb-muted2:  #3e3b35;
+
+  --cb-glass:        rgba(26,25,23,0.92);
+  --cb-glass-2:      rgba(26,25,23,0.70);
+  --cb-card:         #201e1b;
+  --cb-card-border:  rgba(255,235,190,0.10);
+  --cb-shadow:       0 8px 32px rgba(0,0,0,0.55);
+  --cb-shadow-strong:0 16px 56px rgba(0,0,0,0.70);
+
+  --cb-radius-1: 10px;
+  --cb-radius-2: 14px;
+  --cb-radius-3: 18px;
+
+  --cb-header-h:    54px;
+  --cb-tabs-h:      54px;
+  --cb-safe-bottom: 260px;
+}
+
+/* ----------------------------------------------------------
+   2. BASE
+   ---------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html[data-cb-theme="dark"],
+html[data-cb-theme="dark"] body {
+  background:
+    radial-gradient(900px 600px at 20% 10%, rgba(79,140,255,0.05), transparent 55%),
+    radial-gradient(700px 500px at 85% 75%, rgba(200,151,58,0.04), transparent 50%),
+    linear-gradient(180deg, #111210, #0c0b09) !important;
+  color: #ede8df !important;
+}
+
+button { font-family: inherit; }
+
+/* ----------------------------------------------------------
+   3. SHELL — colonne verticale stricte
+   ---------------------------------------------------------- */
+#cb-shell {
+  height: 100%;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0;
+}
+
+/* ----------------------------------------------------------
+   4. HEADER — ligne 1 : brand + chips lang/theme UNIQUEMENT
+      Hauteur fixe pour ne pas gonfler et absorber les tabs
+   ---------------------------------------------------------- */
+#cb-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  flex-shrink: 0;
+
+  height: 54px !important;
+  min-height: 54px !important;
+  max-height: 54px !important;
+  overflow: hidden !important;
+
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-wrap: nowrap !important;
+
+  gap: 10px;
+  padding: 0 16px;
+  margin: 10px 10px 0;
+  border-radius: 16px;
+
+  background: rgba(26,25,23,0.97) !important;
+  border: 1px solid rgba(255,235,190,0.10) !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.55) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+}
+
+#cb-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  font-size: 13px;
+  color: #ede8df;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+#cb-brand .dot {
+  width: 22px; height: 22px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #e8b45a, #c8973a) !important;
+  box-shadow: 0 0 12px rgba(200,151,58,0.45) !important;
+}
+
+#cb-actions {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* ----------------------------------------------------------
+   5. CHIPS lang/theme
+   ---------------------------------------------------------- */
+.cb-chip {
+  border: 1px solid rgba(255,235,190,0.14) !important;
+  background: rgba(39,36,32,0.90) !important;
+  color: #6e6a62 !important;
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: color .15s, border-color .15s;
+}
+.cb-chip:hover     { color: #ede8df !important; border-color: rgba(255,235,190,0.24) !important; }
+.cb-chip.is-active { background: rgba(200,151,58,0.16) !important; border-color: rgba(200,151,58,0.35) !important; color: #e8b45a !important; }
+
+/* ----------------------------------------------------------
+   6. TABS — ligne 2 : capsule Bulle / Player / Timeline
+      Clairement SÉPARÉE du header par margin-top: 8px
+      Background transparent : seule la capsule intérieure est visible
+   ---------------------------------------------------------- */
+#cb-tabs {
+  position: relative !important;   /* pas sticky = pas de superposition */
+  flex-shrink: 0;
+  z-index: 35;
+
+  height: 54px !important;
+  min-height: 54px !important;
+  max-height: 54px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  padding: 6px 12px;
+  /* Gap franc avec le header */
+  margin: 8px 10px 0 !important;
+
+  /* Pas de background sur le conteneur — la pilule est dans #cb-tabs-capsule */
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+#cb-tabs-capsule {
+  width: min(480px, 100%);
+  background: rgba(26,25,23,0.97) !important;
+  border: 1px solid rgba(255,235,190,0.10) !important;
+  border-radius: 999px;
+  padding: 5px;
+  display: flex;
+  gap: 4px;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.45) !important;
+}
+
+.cb-tab {
+  flex: 1;
+  border: 0;
+  background: transparent !important;
+  color: #6e6a62 !important;
+  border-radius: 999px;
+  padding: 9px 12px;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+  position: relative;
+  transition: color .15s, background .15s;
+}
+
+.cb-tab.is-active {
+  background: rgba(39,36,32,0.95) !important;
+  color: #e8b45a !important;
+  box-shadow: 0 0 0 1px rgba(255,235,190,0.18) inset,
+              0 4px 14px rgba(0,0,0,0.40) !important;
+}
+
+.cb-tab.is-active::after {
+  content: '';
+  display: inline-block;
+  width: 5px; height: 5px;
+  border-radius: 999px;
+  background: #e8b45a;
+  box-shadow: 0 0 6px #e8b45a;
+  margin-left: 6px;
+  vertical-align: middle;
+  position: relative; top: -1px;
+}
+
+/* ----------------------------------------------------------
+   7. MAIN SCROLL
+   ---------------------------------------------------------- */
+#cb-main {
+  flex: 1;
+  overflow: auto;
+  padding: 12px;
+  padding-bottom: var(--cb-safe-bottom);
+  display: flex;
+  justify-content: center;
+  scrollbar-width: thin;
+  scrollbar-color: #3e3b35 transparent;
+}
+#cb-main::-webkit-scrollbar { width: 4px; }
+#cb-main::-webkit-scrollbar-thumb { background: #3e3b35; border-radius: 999px; }
+#cb-main-inner { width: min(760px, 100%); display: grid; gap: 10px; }
+
+/* ----------------------------------------------------------
+   8. PANELS
+   ---------------------------------------------------------- */
+.cb-panel {
+  border-radius: 18px;
+  background: #201e1b !important;
+  border: 1px solid rgba(255,235,190,0.10) !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.55) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding: 14px;
+}
+.cb-panel[data-variant="solid"] { background: #201e1b !important; border: 1px solid rgba(255,235,190,0.10) !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+.cb-panel[data-variant="glass"] { background: rgba(26,25,23,0.72) !important; border: 1px solid rgba(255,235,190,0.10) !important; backdrop-filter: blur(18px) !important; -webkit-backdrop-filter: blur(18px) !important; }
+.cb-panel[data-variant="flat"]  { background: transparent !important; border: none !important; box-shadow: none !important; padding: 0 !important; overflow: visible !important; }
+
+/* ----------------------------------------------------------
+   9. UTILITY
+   ---------------------------------------------------------- */
+.cb-hidden { display: none !important; }
+.cb-bubble-ui-root { width: 100%; }
+#cb-bubble-panel-content { overflow: visible; max-height: none; }
+
+/* ----------------------------------------------------------
+   10. SCOPE BAR
+   ---------------------------------------------------------- */
+.cb-scope-bar {
+  display: flex; align-items: center; gap: 16px;
+  padding: 7px 12px;
+  background: #0c0b09; border: 1px solid rgba(255,235,190,0.06);
+  border-radius: 10px;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 11px; overflow-x: auto; scrollbar-width: none;
+}
+.cb-scope-bar::-webkit-scrollbar { display: none; }
+.cb-scope-bar__item { display: flex; align-items: center; gap: 5px; flex-shrink: 0; white-space: nowrap; }
+.cb-scope-bar__key  { color: #6e6a62; font-size: 10px; text-transform: uppercase; letter-spacing: .08em; }
+.cb-scope-bar__val  { color: #22d3a0; font-size: 12px; text-shadow: 0 0 8px rgba(34,211,160,0.4); }
+
+/* ----------------------------------------------------------
+   11. PRESTIGE SURFACE
+   ---------------------------------------------------------- */
+.cbp-surface { background: #201e1b; border: 1px solid rgba(255,235,190,0.10); border-radius: 14px; overflow: hidden; }
+.cb-ui__header { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 14px; border-bottom: 0.5px solid rgba(255,235,190,0.06); background: #1a1917; }
+.cb-ui__title  { margin: 0; font-size: 13px; font-weight: 800; color: #ede8df; }
+.cb-ui__body   { padding: 14px; display: grid; gap: 12px; }
+.cb-section    { border-bottom: 0.5px solid rgba(255,235,190,0.06); padding-bottom: 14px; }
+.cb-section:last-child { border-bottom: none; padding-bottom: 0; }
+.cb-section__title { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #6e6a62; margin: 0 0 10px; }
+
+/* ----------------------------------------------------------
+   12. FORM ELEMENTS
+   ---------------------------------------------------------- */
+.cb-label { font-size: 11px; font-weight: 700; color: #6e6a62; margin-bottom: 6px; }
+
+.cb-input, .cb-select {
+  width: 100%; height: 38px; border-radius: 10px;
+  border: 1px solid rgba(255,235,190,0.10); background: #0c0b09; color: #ede8df;
+  padding: 0 10px; font-size: 13px; font-family: inherit;
+  outline: none; appearance: none; -webkit-appearance: none;
+  transition: border-color .15s, box-shadow .15s;
+}
+.cb-input:focus, .cb-select:focus { border-color: #4f8cff; box-shadow: 0 0 0 3px rgba(79,140,255,0.18); }
+.cb-input::placeholder { color: #3e3b35; }
+
+.cb-range { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; border-radius: 999px; background: #3e3b35; outline: none; cursor: pointer; }
+.cb-range::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 999px; background: #fff; box-shadow: 0 0 0 2px #4f8cff, 0 0 10px rgba(79,140,255,0.45); cursor: pointer; }
+.cb-range::-moz-range-thumb     { width: 16px; height: 16px; border-radius: 999px; border: none; background: #fff; box-shadow: 0 0 0 2px #4f8cff, 0 0 10px rgba(79,140,255,0.45); }
+
+.cb-color { width: 48px; height: 38px; border-radius: 10px; border: 1px solid rgba(255,235,190,0.10); background: #0c0b09; padding: 4px; cursor: pointer; flex-shrink: 0; }
+.cb-color::-webkit-color-swatch-wrapper { padding: 0; border-radius: 8px; }
+.cb-color::-webkit-color-swatch { border: none; border-radius: 8px; }
+.cb-color--wide { width: 100%; }
+
+.cb-live-val { font-family: ui-monospace, Consolas, monospace; font-size: 11px; font-weight: 600; color: #22d3a0; text-shadow: 0 0 6px rgba(34,211,160,0.35); letter-spacing: .04em; }
+
+/* ----------------------------------------------------------
+   13. CHIPS modules
+   ---------------------------------------------------------- */
+.cb-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.cb-chips__item { padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(255,235,190,0.10); background: #0c0b09; color: #6e6a62; font-size: 12px; font-weight: 700; cursor: pointer; transition: all .15s; user-select: none; }
+.cb-chips__item:hover { border-color: rgba(255,235,190,0.18); color: #ede8df; }
+.cb-chips__item.is-active { background: rgba(79,140,255,0.12); border-color: rgba(79,140,255,0.35); color: #7cacff; }
+.cb-chips__item--amber.is-active { background: rgba(200,151,58,0.12); border-color: rgba(200,151,58,0.35); color: #e8b45a; }
+
+/* ----------------------------------------------------------
+   14. POSITION GRID 2×2
+   ---------------------------------------------------------- */
+.cb-pos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; width: fit-content; }
+.cb-pos-grid__btn { width: 56px; height: 40px; border-radius: 10px; border: 1px solid rgba(255,235,190,0.10); background: #0c0b09; color: #6e6a62; font-size: 11px; font-weight: 800; cursor: pointer; transition: all .15s; }
+.cb-pos-grid__btn:hover { border-color: rgba(255,235,190,0.18); color: #ede8df; }
+.cb-pos-grid__btn.is-active { background: rgba(200,151,58,0.12); border-color: #c8973a; color: #e8b45a; box-shadow: 0 0 10px rgba(200,151,58,0.2); }
+
+/* ----------------------------------------------------------
+   15. BUTTONS
+   ---------------------------------------------------------- */
+.cb-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 9px 18px; border-radius: 10px; border: 1px solid rgba(200,151,58,0.35); background: linear-gradient(160deg, rgba(200,151,58,0.18), rgba(200,151,58,0.08)); color: #e8b45a; font-size: 13px; font-weight: 700; font-family: inherit; cursor: pointer; transition: all .15s; box-shadow: 0 0 14px rgba(200,151,58,0.12); }
+.cb-btn:hover  { border-color: rgba(200,151,58,0.55); box-shadow: 0 0 20px rgba(200,151,58,0.25); color: #fff; }
+.cb-btn:active { transform: scale(0.97); }
+.cb-btn--ghost { background: transparent; border-color: rgba(255,235,190,0.10); color: #6e6a62; box-shadow: none; }
+.cb-btn--ghost:hover { border-color: rgba(255,235,190,0.18); color: #ede8df; box-shadow: none; }
+.cb-btn--danger { border-color: rgba(255,80,80,0.35); background: rgba(255,80,80,0.08); color: #ff6060; box-shadow: none; }
+.cb-btn--danger:hover { border-color: rgba(255,80,80,0.6); box-shadow: 0 0 14px rgba(255,80,80,0.2); }
+.cb-btn--sm   { padding: 5px 12px; font-size: 11px; }
+.cb-btn--full { width: 100%; }
+
+/* ----------------------------------------------------------
+   16. LAYOUT HELPERS
+   ---------------------------------------------------------- */
+.cb-row { display: flex; align-items: center; gap: 10px; }
+.cb-row--between { justify-content: space-between; }
+.cb-grow { flex: 1; }
+.cb-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media (max-width: 420px) { .cb-grid-2 { grid-template-columns: 1fr; } }
+
+/* ----------------------------------------------------------
+   17. CARD
+   ---------------------------------------------------------- */
+.cb-card { background: #272420; border: 1px solid rgba(255,235,190,0.06); border-radius: 10px; padding: 12px; display: grid; gap: 10px; }
+
+/* ----------------------------------------------------------
+   18. CODE BLOCK
+   ---------------------------------------------------------- */
+.cb-code-block { background: #0c0b09; border: 1px solid rgba(255,235,190,0.10); border-radius: 10px; padding: 12px 14px; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 11px; line-height: 1.6; color: #22d3a0; word-break: break-all; white-space: pre-wrap; text-shadow: 0 0 6px rgba(34,211,160,0.2); max-height: 180px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #3e3b35 transparent; }
+.cb-code-block::-webkit-scrollbar { width: 3px; }
+.cb-code-block::-webkit-scrollbar-thumb { background: #3e3b35; border-radius: 999px; }
+
+/* ----------------------------------------------------------
+   19. HINT
+   ---------------------------------------------------------- */
+.cb-hint { font-size: 12px; color: #6e6a62; font-weight: 600; font-style: italic; padding: 4px 0; }
+
+/* ----------------------------------------------------------
+   20. DROPZONE
+   ---------------------------------------------------------- */
+.cb-dropzone { border: 1px dashed rgba(255,235,190,0.10); border-radius: 10px; background: #0c0b09; padding: 14px; display: grid; gap: 8px; transition: border-color .15s, background .15s; cursor: pointer; }
+.cb-dropzone.is-over { border-color: #4f8cff; background: rgba(79,140,255,0.06); }
+.cb-dropzone__label { font-size: 12px; color: #6e6a62; font-weight: 600; }
+
+/* ----------------------------------------------------------
+   21. STATUS / COPY FLASH
+   ---------------------------------------------------------- */
+.cb-status { display: inline-flex; align-items: center; gap: 6px; font-family: ui-monospace, Consolas, monospace; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.cb-status__dot { width: 6px; height: 6px; border-radius: 999px; background: #22d3a0; box-shadow: 0 0 6px #22d3a0; flex-shrink: 0; }
+.cb-status--amber .cb-status__dot { background: #e8b45a; box-shadow: 0 0 6px #e8b45a; }
+.cb-status--text { color: #22d3a0; text-shadow: 0 0 6px rgba(34,211,160,0.3); }
+.cb-copy-flash { color: #22d3a0; font-size: 12px; font-weight: 700; opacity: 0; transition: opacity .2s; }
+.cb-copy-flash.is-visible { opacity: 1; }
+
+/* ----------------------------------------------------------
+   22. MOBILE ≤480px
+   ---------------------------------------------------------- */
+@media (max-width: 480px) {
+  :root { --cb-safe-bottom: 320px; }
+  #cb-header { margin: 8px 8px 0; }
+  #cb-tabs   { margin: 6px 8px 0 !important; }
+  #cb-main   { padding-left: 10px; padding-right: 10px; }
+  #cb-brand > span:last-child { display: none; }
+  .cb-chip { padding: 4px 8px; font-size: 10px; }
+}
+
+/* ==========================================================
+   NEUTRALISATION base.css — ce fichier transforme #cb-header
+   en grid 3 colonnes et injecte les tabs dedans via grid-area.
+   On remet tout à plat ici.
+   ========================================================== */
+
+/* 1. #cb-shell — pas de grid, flex-column simple */
+#cb-shell {
+  display: flex !important;
+  flex-direction: column !important;
+  overflow-x: hidden;
+}
+
+/* 2. #cb-header — flex row, PAS de grid */
+#cb-header {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  grid-template-columns: unset !important;
+  grid-template-areas: unset !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 40 !important;
+  background: rgba(26,25,23,0.97) !important;
+  border-bottom: none !important;
+  margin-bottom: 0 !important;
+}
+
+/* 3. #cb-tabs — bloc normal sous le header, PAS dans la grid */
+#cb-tabs {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+  top: 0 !important;                    /* annule le top négatif de base.css */
+  left: auto !important;
+  right: auto !important;
+  transform: none !important;           /* annule translateX(-52%) */
+  width: auto !important;
+  height: 54px !important;
+  z-index: 35 !important;
+  pointer-events: auto !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  margin: 8px 10px 0 !important;
+  grid-area: unset !important;
+  grid-column: unset !important;
+  grid-row: unset !important;
+  border-top: none !important;
+}
+
+/* 4. #cb-tabs-capsule — sa propre pilule, visible */
+#cb-tabs-capsule {
+  width: auto !important;
+  height: auto !important;
+  display: inline-flex !important;
+  align-items: center;
+  background: rgba(26,25,23,0.97) !important;
+  border: 1px solid rgba(255,235,190,0.10) !important;
+  border-radius: 999px !important;
+  padding: 5px !important;
+  gap: 4px;
+  pointer-events: auto !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.45) !important;
+}
+
+/* 5. Tabs boutons */
+#cb-tabs .cb-tab {
+  height: auto !important;
+  display: flex !important;
+  align-items: center;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  pointer-events: auto !important;
+  padding: 9px 14px !important;
+  font-size: 12px !important;
+}
+
+#cb-tabs .cb-tab.is-active {
+  background: rgba(39,36,32,0.95) !important;
+  color: #e8b45a !important;
+  box-shadow: 0 0 0 1px rgba(255,235,190,0.18) inset !important;
+}
+
+/* 6. #cb-brand et #cb-actions — reset grid-area */
+#cb-brand {
+  grid-area: unset !important;
+  grid-column: unset !important;
+}
+#cb-actions {
+  grid-area: unset !important;
+  grid-column: unset !important;
+  justify-self: unset !important;
+}
+
+/* 7. #cb-main — reset grid */
+#cb-main {
+  grid-area: unset !important;
+  grid-column: unset !important;
+  grid-row: unset !important;
+  margin-top: 0 !important;
+}

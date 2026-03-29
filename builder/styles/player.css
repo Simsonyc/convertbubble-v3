@@ -1,0 +1,40 @@
+/* ===================================================
+   ConvertBubble V3 — PLAYER (STRUCTURE ONLY)
+   - layout/containers
+   - 0 couleur / 0 typo / 0 shadow / 0 radius
+   =================================================== */
+
+.cb-ui--player .cbp-surface{
+  display: grid;
+  gap: var(--cbp-gap);
+  padding: var(--cbp-pad);
+}
+
+.cb-ui--player .cb-ui__header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cb-ui--player .cb-ui__body{
+  display: grid;
+  gap: var(--cb-gap-2, 10px);
+}
+
+.cb-ui--player .cb-card{
+  display: grid;
+  gap: var(--cb-gap-2, 10px);
+}
+
+.cb-ui--player .cb-row{
+  display: grid;
+  gap: var(--cb-gap-2, 10px);
+}
+
+.cb-ui--player .cb-actions{
+  display: flex;
+  gap: var(--cb-gap-2, 10px);
+  align-items: center;
+  flex-wrap: wrap;
+}

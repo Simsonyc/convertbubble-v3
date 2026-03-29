@@ -1,0 +1,87 @@
+/* BASE.CSS — extracted from bubble.css
+   Structure transversale / rythme / densité
+   Aucune logique métier
+*/
+
+/* ===================================================
+   SURFACE RYTHM & WIDTH
+   =================================================== */
+
+.cb-bubble-ui .cbp-surface{
+  gap: 22px;
+  padding: 16px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+
+/* ===================================================
+   CARD INTERNAL RHYTHM
+   =================================================== */
+
+.cb-bui-card{
+  gap: 14px;
+}
+
+.cb-bui-card > .cb-bui-title{
+  margin: 0 0 6px 0;
+}
+
+
+/* ===================================================
+   ROW RHYTHM & BREAKPOINT
+   =================================================== */
+
+.cb-bui-row{
+  gap: 12px;
+}
+
+@media (min-width: 720px){
+  .cb-bui-row{
+    gap: 12px 16px;
+  }
+}
+
+
+/* ===================================================
+   DROPZONE DIMENSIONS
+   =================================================== */
+
+.cb-bui-drop{
+  gap: 12px;
+  min-height: 120px;
+}
+
+
+/* ===================================================
+   MICRO TEXT SPACING
+   =================================================== */
+
+.cb-bui-help,
+.cb-bui-mini{
+  margin-top: 4px;
+}
+
+
+/* ===================================================
+   ADVANCED VIEW RHYTHM
+   =================================================== */
+
+.cb-bui-advanced{
+  gap: 22px;
+}
+
+.cb-bui-advanced-trigger{
+  margin-top: 8px;
+}
+
+
+/* ===================================================
+   WIDTH NORMALISATION
+   =================================================== */
+
+.cb-bui-card > *,
+.cb-bui-row > *,
+.cb-bui-drop{
+  width: 100%;
+}

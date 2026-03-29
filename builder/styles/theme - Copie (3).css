@@ -1,0 +1,827 @@
+/* ==========================================================
+   ConvertBubble Builder V3 — theme.css
+   Design system Prestige Dark
+   ========================================================== */
+
+/* ----------------------------------------------------------
+   1. TOKENS
+   ---------------------------------------------------------- */
+:root {
+  /* Surfaces */
+  --cb-bg:      #111210;
+  --cb-rail:    #1a1917;
+  --cb-panel:   #201e1b;
+  --cb-panel2:  #272420;
+  --cb-inset:   #0c0b09;
+
+  /* Borders */
+  --cb-border:  rgba(255,235,190,0.06);
+  --cb-border2: rgba(255,235,190,0.10);
+  --cb-border3: rgba(255,235,190,0.18);
+
+  /* Accents */
+  --cb-accent:  #4f8cff;
+  --cb-accent2: #7cacff;
+  --cb-green:   #22d3a0;
+  --cb-amber:   #c8973a;
+  --cb-amber2:  #e8b45a;
+
+  /* Text */
+  --cb-text:    #ede8df;
+  --cb-muted:   #6e6a62;
+  --cb-muted2:  #3e3b35;
+
+  /* Aliases for bootstrap compatibility */
+  --cb-glass:        rgba(32,30,27,0.72);
+  --cb-glass-2:      rgba(32,30,27,0.52);
+  --cb-card:         var(--cb-panel);
+  --cb-card-border:  var(--cb-border2);
+  --cb-shadow:       0 8px 32px rgba(0,0,0,0.48);
+  --cb-shadow-strong:0 16px 56px rgba(0,0,0,0.64);
+
+  --cb-radius-1: 10px;
+  --cb-radius-2: 14px;
+  --cb-radius-3: 18px;
+
+  --cb-header-h: 54px;
+  --cb-tabs-h:   54px;
+  --cb-safe-bottom: 260px;
+}
+
+/* ----------------------------------------------------------
+   2. RESET / BASE
+   ---------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background: var(--cb-bg);
+  color: var(--cb-text);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+button { font-family: inherit; }
+
+/* ----------------------------------------------------------
+   3. SHELL
+   ---------------------------------------------------------- */
+#cb-shell {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ----------------------------------------------------------
+   4. HEADER
+   ---------------------------------------------------------- */
+#cb-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  height: var(--cb-header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 14px;
+  margin: 10px 10px 0;
+  border-radius: var(--cb-radius-3);
+  background: var(--cb-rail);
+  border: 1px solid var(--cb-border2);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+#cb-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  font-size: 14px;
+  color: var(--cb-text);
+}
+
+#cb-brand .dot {
+  width: 26px;
+  height: 26px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--cb-amber2), var(--cb-amber));
+  box-shadow: 0 0 14px rgba(200,151,58,0.45);
+}
+
+#cb-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ----------------------------------------------------------
+   5. CHIPS (lang / theme)
+   ---------------------------------------------------------- */
+.cb-chip {
+  border: 1px solid var(--cb-border2);
+  background: var(--cb-panel);
+  color: var(--cb-muted);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+  transition: color .15s, border-color .15s, background .15s;
+}
+
+.cb-chip:hover {
+  color: var(--cb-text);
+  border-color: var(--cb-border3);
+}
+
+.cb-chip.is-active {
+  background: rgba(200,151,58,0.14);
+  border-color: rgba(200,151,58,0.30);
+  color: var(--cb-amber2);
+}
+
+/* ----------------------------------------------------------
+   6. TABS CAPSULE
+   ---------------------------------------------------------- */
+#cb-tabs {
+  position: sticky;
+  top: calc(10px + var(--cb-header-h));
+  z-index: 35;
+  height: var(--cb-tabs-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  margin: 8px 10px 0;
+}
+
+#cb-tabs-capsule {
+  width: min(520px, 100%);
+  background: var(--cb-rail);
+  border: 1px solid var(--cb-border2);
+  border-radius: 999px;
+  padding: 5px;
+  display: flex;
+  gap: 4px;
+}
+
+.cb-tab {
+  flex: 1;
+  border: 0;
+  background: transparent;
+  color: var(--cb-muted);
+  border-radius: 999px;
+  padding: 9px 12px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .01em;
+  cursor: pointer;
+  transition: color .15s, background .15s, box-shadow .15s;
+  position: relative;
+}
+
+.cb-tab.is-active {
+  background: var(--cb-panel2);
+  color: var(--cb-amber2);
+  box-shadow: 0 0 0 1px var(--cb-border3) inset,
+              0 4px 14px rgba(0,0,0,0.35);
+}
+
+/* Active dot */
+.cb-tab.is-active::after {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--cb-amber2);
+  box-shadow: 0 0 6px var(--cb-amber2);
+  margin-left: 6px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+
+/* ----------------------------------------------------------
+   7. MAIN SCROLL
+   ---------------------------------------------------------- */
+#cb-main {
+  flex: 1;
+  overflow: auto;
+  padding: 12px;
+  padding-bottom: var(--cb-safe-bottom);
+  display: flex;
+  justify-content: center;
+  scrollbar-width: thin;
+  scrollbar-color: var(--cb-muted2) transparent;
+}
+
+#cb-main::-webkit-scrollbar { width: 4px; }
+#cb-main::-webkit-scrollbar-track { background: transparent; }
+#cb-main::-webkit-scrollbar-thumb {
+  background: var(--cb-muted2);
+  border-radius: 999px;
+}
+
+#cb-main-inner {
+  width: min(760px, 100%);
+  display: grid;
+  gap: 10px;
+}
+
+/* ----------------------------------------------------------
+   8. PANELS
+   ---------------------------------------------------------- */
+.cb-panel {
+  border-radius: var(--cb-radius-3);
+  background: var(--cb-panel);
+  border: 1px solid var(--cb-border2);
+  box-shadow: var(--cb-shadow);
+  padding: 14px;
+}
+
+.cb-panel[data-variant="solid"] {
+  background: var(--cb-panel);
+  border: 1px solid var(--cb-border2);
+  box-shadow: var(--cb-shadow);
+}
+
+.cb-panel[data-variant="glass"] {
+  background: var(--cb-glass);
+  border: 1px solid var(--cb-border2);
+  box-shadow: var(--cb-shadow);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.cb-panel[data-variant="flat"] {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  overflow: visible !important;
+}
+
+/* ----------------------------------------------------------
+   9. UTILITY
+   ---------------------------------------------------------- */
+.cb-hidden { display: none !important; }
+
+.cb-bubble-ui-root { width: 100%; }
+
+#cb-bubble-panel-content {
+  overflow: visible;
+  max-height: none;
+}
+
+/* ----------------------------------------------------------
+   10. SCOPE BAR (DaVinci style)
+   ---------------------------------------------------------- */
+.cb-scope-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 7px 12px;
+  background: var(--cb-inset);
+  border: 1px solid var(--cb-border);
+  border-radius: var(--cb-radius-1);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.cb-scope-bar::-webkit-scrollbar { display: none; }
+
+.cb-scope-bar__item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.cb-scope-bar__key {
+  color: var(--cb-muted);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.cb-scope-bar__val {
+  color: var(--cb-green);
+  font-size: 12px;
+  text-shadow: 0 0 8px rgba(34,211,160,0.4);
+}
+
+/* ----------------------------------------------------------
+   11. PRESTIGE SURFACE (module wrapper)
+   ---------------------------------------------------------- */
+.cbp-surface {
+  background: var(--cb-panel);
+  border: 1px solid var(--cb-border2);
+  border-radius: var(--cb-radius-2);
+  overflow: hidden;
+}
+
+.cb-ui__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 14px;
+  border-bottom: 0.5px solid var(--cb-border);
+  background: var(--cb-rail);
+}
+
+.cb-ui__title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .01em;
+  color: var(--cb-text);
+}
+
+.cb-ui__body {
+  padding: 14px;
+  display: grid;
+  gap: 12px;
+}
+
+/* Section divider */
+.cb-section {
+  border-bottom: 0.5px solid var(--cb-border);
+  padding-bottom: 14px;
+}
+.cb-section:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.cb-section__title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--cb-muted);
+  margin: 0 0 10px;
+}
+
+/* ----------------------------------------------------------
+   12. FORM ELEMENTS (global prestige)
+   ---------------------------------------------------------- */
+
+/* Labels */
+.cb-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .03em;
+  color: var(--cb-muted);
+  margin-bottom: 6px;
+}
+
+/* Inputs / Selects */
+.cb-input,
+.cb-select {
+  width: 100%;
+  height: 38px;
+  border-radius: var(--cb-radius-1);
+  border: 1px solid var(--cb-border2);
+  background: var(--cb-inset);
+  color: var(--cb-text);
+  padding: 0 10px;
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color .15s, box-shadow .15s;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.cb-input:focus,
+.cb-select:focus {
+  border-color: var(--cb-accent);
+  box-shadow: 0 0 0 3px rgba(79,140,255,0.18);
+}
+
+.cb-input::placeholder { color: var(--cb-muted2); }
+
+/* Textarea */
+.cb-textarea {
+  width: 100%;
+  border-radius: var(--cb-radius-1);
+  border: 1px solid var(--cb-border2);
+  background: var(--cb-inset);
+  color: var(--cb-text);
+  padding: 10px;
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  resize: vertical;
+  transition: border-color .15s, box-shadow .15s;
+}
+
+.cb-textarea:focus {
+  border-color: var(--cb-accent);
+  box-shadow: 0 0 0 3px rgba(79,140,255,0.18);
+}
+
+/* Range sliders */
+.cb-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--cb-muted2);
+  outline: none;
+  cursor: pointer;
+  /* filled portion via JS/inline gradient override */
+}
+
+.cb-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 0 0 2px var(--cb-accent), 0 0 10px rgba(79,140,255,0.45);
+  cursor: pointer;
+  transition: box-shadow .15s;
+}
+
+.cb-range::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  border: none;
+  background: #fff;
+  box-shadow: 0 0 0 2px var(--cb-accent), 0 0 10px rgba(79,140,255,0.45);
+  cursor: pointer;
+}
+
+.cb-range:focus::-webkit-slider-thumb {
+  box-shadow: 0 0 0 3px rgba(79,140,255,0.35), 0 0 14px rgba(79,140,255,0.5);
+}
+
+/* Color input */
+.cb-color {
+  width: 48px;
+  height: 38px;
+  border-radius: var(--cb-radius-1);
+  border: 1px solid var(--cb-border2);
+  background: var(--cb-inset);
+  padding: 4px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.cb-color::-webkit-color-swatch-wrapper { padding: 0; border-radius: 8px; }
+.cb-color::-webkit-color-swatch { border: none; border-radius: 8px; }
+.cb-color--wide { width: 100%; }
+
+/* Live value display (monospace green DaVinci) */
+.cb-live-val {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--cb-green);
+  text-shadow: 0 0 6px rgba(34,211,160,0.35);
+  letter-spacing: .04em;
+}
+
+/* ----------------------------------------------------------
+   13. CHIPS (selection multiples)
+   ---------------------------------------------------------- */
+.cb-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.cb-chips__item {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--cb-border2);
+  background: var(--cb-inset);
+  color: var(--cb-muted);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .15s;
+  user-select: none;
+}
+
+.cb-chips__item:hover {
+  border-color: var(--cb-border3);
+  color: var(--cb-text);
+}
+
+.cb-chips__item.is-active {
+  background: rgba(79,140,255,0.12);
+  border-color: rgba(79,140,255,0.35);
+  color: var(--cb-accent2);
+}
+
+/* Amber chips variant */
+.cb-chips__item--amber.is-active {
+  background: rgba(200,151,58,0.12);
+  border-color: rgba(200,151,58,0.35);
+  color: var(--cb-amber2);
+}
+
+/* ----------------------------------------------------------
+   14. GRID 2×2 POSITION
+   ---------------------------------------------------------- */
+.cb-pos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  width: fit-content;
+}
+
+.cb-pos-grid__btn {
+  width: 56px;
+  height: 40px;
+  border-radius: var(--cb-radius-1);
+  border: 1px solid var(--cb-border2);
+  background: var(--cb-inset);
+  color: var(--cb-muted);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .04em;
+  cursor: pointer;
+  transition: all .15s;
+}
+
+.cb-pos-grid__btn:hover {
+  border-color: var(--cb-border3);
+  color: var(--cb-text);
+}
+
+.cb-pos-grid__btn.is-active {
+  background: rgba(200,151,58,0.12);
+  border-color: var(--cb-amber);
+  color: var(--cb-amber2);
+  box-shadow: 0 0 10px rgba(200,151,58,0.2);
+}
+
+/* ----------------------------------------------------------
+   15. BUTTONS
+   ---------------------------------------------------------- */
+/* Primary — amber glow */
+.cb-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 18px;
+  border-radius: var(--cb-radius-1);
+  border: 1px solid rgba(200,151,58,0.35);
+  background: linear-gradient(160deg, rgba(200,151,58,0.18), rgba(200,151,58,0.08));
+  color: var(--cb-amber2);
+  font-size: 13px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all .15s;
+  box-shadow: 0 0 14px rgba(200,151,58,0.12);
+}
+
+.cb-btn:hover {
+  border-color: rgba(200,151,58,0.55);
+  box-shadow: 0 0 20px rgba(200,151,58,0.25);
+  color: #fff;
+}
+
+.cb-btn:active {
+  transform: scale(0.97);
+}
+
+/* Ghost variant */
+.cb-btn--ghost {
+  background: transparent;
+  border-color: var(--cb-border2);
+  color: var(--cb-muted);
+  box-shadow: none;
+}
+
+.cb-btn--ghost:hover {
+  border-color: var(--cb-border3);
+  color: var(--cb-text);
+  box-shadow: none;
+}
+
+/* Danger variant */
+.cb-btn--danger {
+  border-color: rgba(255,80,80,0.35);
+  background: rgba(255,80,80,0.08);
+  color: #ff6060;
+  box-shadow: none;
+}
+
+.cb-btn--danger:hover {
+  border-color: rgba(255,80,80,0.6);
+  box-shadow: 0 0 14px rgba(255,80,80,0.2);
+}
+
+/* Small */
+.cb-btn--sm {
+  padding: 5px 12px;
+  font-size: 11px;
+}
+
+/* Full width */
+.cb-btn--full { width: 100%; }
+
+/* ----------------------------------------------------------
+   16. LAYOUT HELPERS
+   ---------------------------------------------------------- */
+.cb-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cb-row--top { align-items: flex-start; }
+.cb-row--between { justify-content: space-between; }
+.cb-grow { flex: 1; }
+
+.cb-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+@media (max-width: 420px) {
+  .cb-grid-2 { grid-template-columns: 1fr; }
+}
+
+/* ----------------------------------------------------------
+   17. CARD (inner)
+   ---------------------------------------------------------- */
+.cb-card {
+  background: var(--cb-panel2);
+  border: 1px solid var(--cb-border);
+  border-radius: var(--cb-radius-1);
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+/* ----------------------------------------------------------
+   18. SNIPPET / CODE BLOCK
+   ---------------------------------------------------------- */
+.cb-code-block {
+  background: var(--cb-inset);
+  border: 1px solid var(--cb-border2);
+  border-radius: var(--cb-radius-1);
+  padding: 12px 14px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--cb-green);
+  word-break: break-all;
+  white-space: pre-wrap;
+  text-shadow: 0 0 6px rgba(34,211,160,0.2);
+  max-height: 180px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--cb-muted2) transparent;
+}
+
+.cb-code-block::-webkit-scrollbar { width: 3px; }
+.cb-code-block::-webkit-scrollbar-thumb { background: var(--cb-muted2); border-radius: 999px; }
+
+/* ----------------------------------------------------------
+   19. HINT / EMPTY STATE
+   ---------------------------------------------------------- */
+.cb-hint {
+  font-size: 12px;
+  color: var(--cb-muted);
+  font-weight: 600;
+  font-style: italic;
+  padding: 4px 0;
+}
+
+/* ----------------------------------------------------------
+   20. DROPZONE
+   ---------------------------------------------------------- */
+.cb-dropzone {
+  border: 1px dashed var(--cb-border2);
+  border-radius: var(--cb-radius-1);
+  background: var(--cb-inset);
+  padding: 14px;
+  display: grid;
+  gap: 8px;
+  transition: border-color .15s, background .15s;
+  cursor: pointer;
+}
+
+.cb-dropzone.is-over {
+  border-color: var(--cb-accent);
+  background: rgba(79,140,255,0.06);
+}
+
+.cb-dropzone__label {
+  font-size: 12px;
+  color: var(--cb-muted);
+  font-weight: 600;
+}
+
+/* ----------------------------------------------------------
+   21. TIMELINE CTA ROW
+   ---------------------------------------------------------- */
+.cb-cta-row {
+  background: var(--cb-inset);
+  border: 1px solid var(--cb-border);
+  border-radius: var(--cb-radius-1);
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.cb-cta-row__inputs {
+  display: grid;
+  grid-template-columns: 56px 1fr 1fr auto;
+  gap: 6px;
+  align-items: center;
+}
+
+@media (max-width: 520px) {
+  .cb-cta-row__inputs {
+    grid-template-columns: 56px 1fr auto;
+    grid-template-rows: auto auto;
+  }
+  .cb-cta-row__inputs .cb-cta-url {
+    grid-column: 1 / -2;
+  }
+}
+
+/* ----------------------------------------------------------
+   22. OVERLAYS (bootstrap-driven)
+   ---------------------------------------------------------- */
+/* Bubble preview overlay — no CSS here, bootstrap owns it */
+
+/* ----------------------------------------------------------
+   23. DESKTOP 2-COL ≥768px
+   ---------------------------------------------------------- */
+@media (min-width: 768px) {
+  #cb-main-inner {
+    /* shell peut activer 2 colonnes via une classe */
+  }
+}
+
+/* ----------------------------------------------------------
+   24. STATUS 7-SEGMENT (DaVinci)
+   ---------------------------------------------------------- */
+.cb-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.cb-status__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--cb-green);
+  box-shadow: 0 0 6px var(--cb-green);
+  flex-shrink: 0;
+}
+
+.cb-status--amber .cb-status__dot {
+  background: var(--cb-amber2);
+  box-shadow: 0 0 6px var(--cb-amber2);
+}
+
+.cb-status--text {
+  color: var(--cb-green);
+  text-shadow: 0 0 6px rgba(34,211,160,0.3);
+}
+
+/* ----------------------------------------------------------
+   25. COPY SUCCESS FLASH
+   ---------------------------------------------------------- */
+.cb-copy-flash {
+  color: var(--cb-green);
+  font-size: 12px;
+  font-weight: 700;
+  opacity: 0;
+  transition: opacity .2s;
+}
+.cb-copy-flash.is-visible {
+  opacity: 1;
+}
